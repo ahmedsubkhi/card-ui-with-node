@@ -1,8 +1,10 @@
 # card-ui-with-node
 
-npm install express
-npm install body-parser
-npm install cookie-parser
-npm install multer
-npm install mysql
-npm install express-myconnection
+* go to terminal
+npm install express body-parser cookie-parser multer mysql express-myconnection
+
+* Import mysql database from 'card_ui.sql'
+* Edit connection in file 'myserver.js'
+
+* go to terminal
+node myserver.js

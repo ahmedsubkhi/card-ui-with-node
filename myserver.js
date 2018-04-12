@@ -6,8 +6,8 @@ mysql = require('mysql');
 app.use(
     connection(mysql,{
         host     : 'localhost',
-        user     : 'root',
-        password : 'subkhisubkhi',
+        user     : 'your_user_here',
+        password : 'your_password_here',
         database : 'card_ui',
         debug    : false
     },'request')
@@ -23,33 +23,6 @@ router.use(function(req, res, next) {
 });
 
 
-
-var indexes = router.route('/:pathnames');
-indexes.get(function(request,response,next){
-	// Parse the request containing file name
-	var pathnames = request.params.pathnames;
-	// Print the name of the file for which request is made.
-	console.log("Request for " + pathnames + " received.");
-	// Read the requested file content from file system
-	fs.readFile(pathnames, function (err, data) {
-		if (err) {
-			console.log(err);
-			// HTTP Status: 404 : NOT FOUND
-			// Content Type: text/plain
-			response.writeHead(404, {'Content-Type': 'text/html'});
-		} else {
-			//Page found
-			// HTTP Status: 200 : OK
-			// Content Type: text/plain
-			response.writeHead(200, {'Content-Type': 'text/html'});
-			// Write the content of the file to response body
-			response.write(data.toString());
-		}
-		// Send the response body
-		response.end();
-	});
-  // res.send('Welcome');
-});
 
 var allstudentspage = router.route('/students');
 allstudentspage.get(function(req,res,next){
@@ -80,6 +53,33 @@ studentpage.get(function(req,res,next){
 	    res.json(rows);
 		});
 	});
+});
+
+var indexes = router.route('/:pathnames');
+indexes.get(function(request,response,next){
+	// Parse the request containing file name
+	var pathnames = request.params.pathnames;
+	// Print the name of the file for which request is made.
+	console.log("Request for " + pathnames + " received.");
+	// Read the requested file content from file system
+	fs.readFile(pathnames, function (err, data) {
+		if (err) {
+			console.log(err);
+			// HTTP Status: 404 : NOT FOUND
+			// Content Type: text/plain
+			response.writeHead(404, {'Content-Type': 'text/html'});
+		} else {
+			//Page found
+			// HTTP Status: 200 : OK
+			// Content Type: text/plain
+			response.writeHead(200, {'Content-Type': 'text/html'});
+			// Write the content of the file to response body
+			response.write(data.toString());
+		}
+		// Send the response body
+		response.end();
+	});
+  // res.send('Welcome');
 });
 
 app.use('/', router);
