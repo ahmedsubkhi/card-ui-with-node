@@ -1,8 +1,9 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
+var connection  = require('express-myconnection');
+var mysql = require('mysql');
 
-var connection  = require('express-myconnection'),
-mysql = require('mysql');
 app.use(
     connection(mysql,{
         host     : 'localhost',
@@ -13,7 +14,6 @@ app.use(
     },'request')
 );
 
-var fs = require('fs');
 
 //RESTful route
 var router = express.Router();
@@ -87,5 +87,5 @@ app.use('/', router);
 var server = app.listen(3000, function() {
   var host = 'localhost'
   var port = '3000'
-  console.log("Server listening at http://%s:%s", host, port)
+  console.log(`Server listening at http://%s:%s`, host, port)
 });
